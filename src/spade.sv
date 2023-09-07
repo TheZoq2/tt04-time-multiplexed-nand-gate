@@ -97,15 +97,15 @@ module \tto4_tmng::main::regfile  (
     logic[7:0] _e_62;
     logic[6:0] addr_n1;
     logic \b ;
-    logic _e_404;
-    logic _e_406;
-    logic _e_407;
-    logic _e_408;
-    logic _e_409;
+    logic _e_367;
+    logic _e_369;
+    logic _e_370;
+    logic _e_371;
+    logic _e_372;
     logic _e_65;
     (* src = "src/main.spade:33,33" *)
     logic[8:0] _e_64;
-    logic _e_411;
+    logic _e_374;
     logic _e_70;
     logic[6:0] _e_71;
     logic _e_72;
@@ -119,13 +119,13 @@ module \tto4_tmng::main::regfile  (
     logic[127:0] \mem ;
     (* src = "src/main.spade:39,19" *)
     logic \out ;
-    logic[6:0] _e_413;
-    logic _e_412;
+    logic[6:0] _e_376;
+    logic _e_375;
     logic _e_86;
-    logic[6:0] _e_415;
-    logic _e_414;
+    logic[6:0] _e_378;
+    logic _e_377;
     logic _e_88;
-    logic _e_416;
+    logic _e_379;
     (* src = "src/main.spade:41,9" *)
     logic _e_83;
     always @(posedge \clk ) begin
@@ -143,20 +143,20 @@ module \tto4_tmng::main::regfile  (
     assign _e_62 = \write [7:0];
     assign addr_n1 = _e_62[7:1];
     assign \b  = _e_62[0];
-    assign _e_404 = \write [8] == 1'd0;
-    assign _e_406 = 1;
-    assign _e_407 = 1;
-    assign _e_408 = _e_406 && _e_407;
-    assign _e_409 = _e_404 && _e_408;
+    assign _e_367 = \write [8] == 1'd0;
+    assign _e_369 = 1;
+    assign _e_370 = 1;
+    assign _e_371 = _e_369 && _e_370;
+    assign _e_372 = _e_367 && _e_371;
     assign _e_65 = 1;
     assign _e_64 = {_e_65, addr_n1, \b };
-    assign _e_411 = \write [8] == 1'd1;
+    assign _e_374 = \write [8] == 1'd1;
     assign _e_70 = 0;
     assign _e_71 = 0;
     assign _e_72 = 0;
     assign _e_69 = {_e_70, _e_71, _e_72};
     always_comb begin
-        priority casez ({_e_409, _e_411})
+        priority casez ({_e_372, _e_374})
             2'b1?: \write_raw  = _e_64;
             2'b01: \write_raw  = _e_69;
             2'b?: \write_raw  = 'x;
@@ -169,15 +169,15 @@ module \tto4_tmng::main::regfile  (
         end
     end
     assign \out  = \mem [\addr ];
-    assign _e_413 = 0;
-    assign _e_412 = \s1_addr  == _e_413;
+    assign _e_376 = 0;
+    assign _e_375 = \s1_addr  == _e_376;
     assign _e_86 = 0;
-    assign _e_415 = 1;
-    assign _e_414 = \s1_addr  == _e_415;
+    assign _e_378 = 1;
+    assign _e_377 = \s1_addr  == _e_378;
     assign _e_88 = 1;
-    assign _e_416 = 1;
+    assign _e_379 = 1;
     always_comb begin
-        priority casez ({_e_412, _e_414, _e_416})
+        priority casez ({_e_375, _e_377, _e_379})
             3'b1??: _e_83 = _e_86;
             3'b01?: _e_83 = _e_88;
             3'b001: _e_83 = \s1_out ;
@@ -253,9 +253,9 @@ module \tto4_tmng::main::output_fifo  (
     logic[1:0] \push ;
     assign \push  = push_i;
     logic \next ;
-    logic _e_418;
-    logic _e_419;
-    logic _e_420;
+    logic _e_381;
+    logic _e_382;
+    logic _e_383;
     logic[7:0] _e_116;
     (* src = "src/main.spade:64,23" *)
     logic[7:0] _e_114;
@@ -265,24 +265,24 @@ module \tto4_tmng::main::output_fifo  (
     logic[7:0] _e_117;
     (* src = "src/main.spade:64,23" *)
     logic[7:0] _e_113;
-    logic _e_422;
+    logic _e_385;
     (* src = "src/main.spade:63,24" *)
     logic[7:0] _e_109;
     (* src = "src/main.spade:63,14" *)
     reg[7:0] \content ;
     assign \next  = \push [0:0];
-    assign _e_418 = \push [1] == 1'd0;
-    assign _e_419 = 1;
-    assign _e_420 = _e_418 && _e_419;
+    assign _e_381 = \push [1] == 1'd0;
+    assign _e_382 = 1;
+    assign _e_383 = _e_381 && _e_382;
     assign _e_116 = 1;
     assign _e_114 = \content  << _e_116;
     assign _e_120 = 1;
     assign _e_122 = 0;
     assign _e_117 = \next  ? _e_120 : _e_122;
     assign _e_113 = _e_114 | _e_117;
-    assign _e_422 = \push [1] == 1'd1;
+    assign _e_385 = \push [1] == 1'd1;
     always_comb begin
-        priority casez ({_e_420, _e_422})
+        priority casez ({_e_383, _e_385})
             2'b1?: _e_109 = _e_113;
             2'b01: _e_109 = \content ;
             2'b?: _e_109 = 'x;
@@ -615,295 +615,6 @@ module \tto4_tmng::main::impl_harness  (
     assign output__ = _e_245;
 endmodule
 
-module \tto4_tmng::fpgatest::simple_test_driver  (
-        input clk_i,
-        input rst_i,
-        output[15:0] output__
-    );
-    `ifdef COCOTB_SIM
-    string __top_module;
-    string __vcd_file;
-    initial begin
-        if ($value$plusargs("TOP_MODULE=%s", __top_module) && __top_module == "tto4_tmng::fpgatest::simple_test_driver" && $value$plusargs("VCD_FILENAME=%s", __vcd_file)) begin
-            $dumpfile (__vcd_file);
-            $dumpvars (0, \tto4_tmng::fpgatest::simple_test_driver );
-        end
-    end
-    `endif
-    logic \clk ;
-    assign \clk  = clk_i;
-    logic \rst ;
-    assign \rst  = rst_i;
-    logic[31:0] _e_251;
-    logic[31:0] _e_255;
-    (* src = "src/fpgatest.spade:20,57" *)
-    logic _e_253;
-    logic[31:0] _e_257;
-    logic[31:0] _e_262;
-    (* src = "src/fpgatest.spade:24,15" *)
-    logic[32:0] _e_260;
-    (* src = "src/fpgatest.spade:24,9" *)
-    logic[31:0] _e_259;
-    (* src = "src/fpgatest.spade:20,54" *)
-    logic[31:0] _e_252;
-    (* src = "src/fpgatest.spade:20,14" *)
-    reg[31:0] \second_counter ;
-    logic _e_267;
-    (* src = "src/fpgatest.spade:27,32" *)
-    logic[12:0] _e_266;
-    logic \one ;
-    logic _e_424;
-    logic _e_425;
-    logic _e_426;
-    logic[31:0] _e_277;
-    (* src = "src/fpgatest.spade:30,20" *)
-    logic _e_275;
-    logic[9:0] _e_280;
-    (* src = "src/fpgatest.spade:31,21" *)
-    logic[12:0] _e_279;
-    (* src = "src/fpgatest.spade:30,17" *)
-    logic[12:0] _e_274;
-    logic[9:0] \duration ;
-    logic one_n1;
-    logic _e_428;
-    logic _e_429;
-    logic _e_430;
-    logic _e_431;
-    logic _e_432;
-    logic[9:0] _e_291;
-    (* src = "src/fpgatest.spade:38,20" *)
-    logic _e_289;
-    logic[9:0] _e_294;
-    (* src = "src/fpgatest.spade:39,21" *)
-    logic[12:0] _e_293;
-    logic[9:0] _e_301;
-    (* src = "src/fpgatest.spade:42,52" *)
-    logic[10:0] _e_299;
-    (* src = "src/fpgatest.spade:42,46" *)
-    logic[9:0] _e_298;
-    (* src = "src/fpgatest.spade:42,21" *)
-    logic[12:0] _e_297;
-    (* src = "src/fpgatest.spade:38,17" *)
-    logic[12:0] _e_288;
-    logic[9:0] duration_n1;
-    logic one_n2;
-    logic _e_434;
-    logic _e_435;
-    logic _e_436;
-    logic _e_437;
-    logic _e_438;
-    logic[9:0] _e_310;
-    (* src = "src/fpgatest.spade:46,20" *)
-    logic _e_308;
-    (* src = "src/fpgatest.spade:47,43" *)
-    logic _e_313;
-    (* src = "src/fpgatest.spade:47,21" *)
-    logic[12:0] _e_312;
-    logic[9:0] _e_320;
-    (* src = "src/fpgatest.spade:50,51" *)
-    logic[10:0] _e_318;
-    (* src = "src/fpgatest.spade:50,45" *)
-    logic[9:0] _e_317;
-    (* src = "src/fpgatest.spade:50,21" *)
-    logic[12:0] _e_316;
-    (* src = "src/fpgatest.spade:46,17" *)
-    logic[12:0] _e_307;
-    (* src = "src/fpgatest.spade:28,9" *)
-    logic[12:0] _e_269;
-    (* src = "src/fpgatest.spade:27,14" *)
-    reg[12:0] \state ;
-    logic \_ ;
-    logic _e_440;
-    logic _e_441;
-    logic _e_442;
-    logic[7:0] _e_327;
-    logic[7:0] _e_328;
-    (* src = "src/fpgatest.spade:57,38" *)
-    logic[15:0] _e_326;
-    logic[9:0] __n1;
-    logic _e_330;
-    logic _e_444;
-    logic _e_445;
-    logic _e_446;
-    logic _e_447;
-    logic _e_448;
-    logic[7:0] _e_333;
-    logic[7:0] _e_334;
-    (* src = "src/fpgatest.spade:58,48" *)
-    logic[15:0] _e_332;
-    logic[9:0] __n2;
-    logic _e_336;
-    logic _e_450;
-    logic _e_451;
-    logic _e_453;
-    logic _e_454;
-    logic[7:0] _e_339;
-    logic[7:0] _e_340;
-    (* src = "src/fpgatest.spade:59,47" *)
-    logic[15:0] _e_338;
-    logic[9:0] __n3;
-    logic _e_342;
-    logic _e_456;
-    logic _e_457;
-    logic _e_458;
-    logic _e_459;
-    logic _e_460;
-    logic[7:0] _e_345;
-    logic[7:0] _e_346;
-    (* src = "src/fpgatest.spade:61,47" *)
-    logic[15:0] _e_344;
-    logic[9:0] __n4;
-    logic _e_348;
-    logic _e_462;
-    logic _e_463;
-    logic _e_465;
-    logic _e_466;
-    logic[7:0] _e_351;
-    logic[7:0] _e_352;
-    (* src = "src/fpgatest.spade:62,46" *)
-    logic[15:0] _e_350;
-    (* src = "src/fpgatest.spade:56,26" *)
-    logic[15:0] _e_355;
-    logic[7:0] \addr1 ;
-    logic[7:0] \addr2 ;
-    (* src = "src/fpgatest.spade:64,5" *)
-    logic[15:0] _e_356;
-    assign _e_251 = 32'd0;
-    assign _e_255 = 32'd0;
-    assign _e_253 = \second_counter  == _e_255;
-    assign _e_257 = 32'd100000000;
-    assign _e_262 = 32'd1;
-    assign _e_260 = $signed(\second_counter ) - $signed(_e_262);
-    assign _e_259 = _e_260[31:0];
-    assign _e_252 = _e_253 ? _e_257 : _e_259;
-    always @(posedge \clk , posedge \rst ) begin
-        if (\rst ) begin
-            \second_counter  <= _e_251;
-        end
-        else begin
-            \second_counter  <= _e_252;
-        end
-    end
-    assign _e_267 = 0;
-    assign _e_266 = {2'd0, _e_267, 10'bX};
-    assign \one  = \state [10:10];
-    assign _e_424 = \state [12:11] == 2'd0;
-    assign _e_425 = 1;
-    assign _e_426 = _e_424 && _e_425;
-    assign _e_277 = 32'd0;
-    assign _e_275 = \second_counter  == _e_277;
-    assign _e_280 = 10;
-    assign _e_279 = {2'd1, _e_280, \one };
-    assign _e_274 = _e_275 ? _e_279 : \state ;
-    assign \duration  = \state [10:1];
-    assign one_n1 = \state [0:0];
-    assign _e_428 = \state [12:11] == 2'd1;
-    assign _e_429 = 1;
-    assign _e_430 = 1;
-    assign _e_431 = _e_428 && _e_429;
-    assign _e_432 = _e_431 && _e_430;
-    assign _e_291 = 0;
-    assign _e_289 = \duration  == _e_291;
-    assign _e_294 = 10;
-    assign _e_293 = {2'd2, _e_294, one_n1};
-    assign _e_301 = 1;
-    assign _e_299 = $signed(\duration ) - $signed(_e_301);
-    assign _e_298 = _e_299[9:0];
-    assign _e_297 = {2'd1, _e_298, one_n1};
-    assign _e_288 = _e_289 ? _e_293 : _e_297;
-    assign duration_n1 = \state [10:1];
-    assign one_n2 = \state [0:0];
-    assign _e_434 = \state [12:11] == 2'd2;
-    assign _e_435 = 1;
-    assign _e_436 = 1;
-    assign _e_437 = _e_434 && _e_435;
-    assign _e_438 = _e_437 && _e_436;
-    assign _e_310 = 0;
-    assign _e_308 = duration_n1 == _e_310;
-    assign _e_313 = !one_n2;
-    assign _e_312 = {2'd0, _e_313, 10'bX};
-    assign _e_320 = 1;
-    assign _e_318 = $signed(duration_n1) - $signed(_e_320);
-    assign _e_317 = _e_318[9:0];
-    assign _e_316 = {2'd2, _e_317, one_n2};
-    assign _e_307 = _e_308 ? _e_312 : _e_316;
-    always_comb begin
-        priority casez ({_e_426, _e_432, _e_438})
-            3'b1??: _e_269 = _e_274;
-            3'b01?: _e_269 = _e_288;
-            3'b001: _e_269 = _e_307;
-            3'b?: _e_269 = 'x;
-        endcase
-    end
-    always @(posedge \clk , posedge \rst ) begin
-        if (\rst ) begin
-            \state  <= _e_266;
-        end
-        else begin
-            \state  <= _e_269;
-        end
-    end
-    assign \_  = \state [10:10];
-    assign _e_440 = \state [12:11] == 2'd0;
-    assign _e_441 = 1;
-    assign _e_442 = _e_440 && _e_441;
-    assign _e_327 = 0;
-    assign _e_328 = 0;
-    assign _e_326 = {_e_327, _e_328};
-    assign __n1 = \state [10:1];
-    assign _e_330 = \state [0:0];
-    assign _e_444 = \state [12:11] == 2'd1;
-    assign _e_445 = 1;
-    assign _e_446 = !_e_330;
-    assign _e_447 = _e_444 && _e_445;
-    assign _e_448 = _e_447 && _e_446;
-    assign _e_333 = 0;
-    assign _e_334 = 1;
-    assign _e_332 = {_e_333, _e_334};
-    assign __n2 = \state [10:1];
-    assign _e_336 = \state [0:0];
-    assign _e_450 = \state [12:11] == 2'd1;
-    assign _e_451 = 1;
-    assign _e_453 = _e_450 && _e_451;
-    assign _e_454 = _e_453 && _e_336;
-    assign _e_339 = 1;
-    assign _e_340 = 1;
-    assign _e_338 = {_e_339, _e_340};
-    assign __n3 = \state [10:1];
-    assign _e_342 = \state [0:0];
-    assign _e_456 = \state [12:11] == 2'd2;
-    assign _e_457 = 1;
-    assign _e_458 = !_e_342;
-    assign _e_459 = _e_456 && _e_457;
-    assign _e_460 = _e_459 && _e_458;
-    assign _e_345 = 128;
-    assign _e_346 = 128;
-    assign _e_344 = {_e_345, _e_346};
-    assign __n4 = \state [10:1];
-    assign _e_348 = \state [0:0];
-    assign _e_462 = \state [12:11] == 2'd2;
-    assign _e_463 = 1;
-    assign _e_465 = _e_462 && _e_463;
-    assign _e_466 = _e_465 && _e_348;
-    assign _e_351 = 129;
-    assign _e_352 = 128;
-    assign _e_350 = {_e_351, _e_352};
-    always_comb begin
-        priority casez ({_e_442, _e_448, _e_454, _e_460, _e_466})
-            5'b1????: _e_355 = _e_326;
-            5'b01???: _e_355 = _e_332;
-            5'b001??: _e_355 = _e_338;
-            5'b0001?: _e_355 = _e_344;
-            5'b00001: _e_355 = _e_350;
-            5'b?: _e_355 = 'x;
-        endcase
-    end
-    assign \addr1  = _e_355[15:8];
-    assign \addr2  = _e_355[7:0];
-    assign _e_356 = {\addr1 , \addr2 };
-    assign output__ = _e_356;
-endmodule
-
 module top_fpgatest (
         input[7:0] ui_in,
         output[7:0] uo_out,
@@ -928,59 +639,317 @@ module top_fpgatest (
     assign ui_in_drive = \ui_in_drive_mut ;
     logic[7:0] \uio_in_drive_mut ;
     assign uio_in_drive = \uio_in_drive_mut ;
-    logic[9:0] _e_362;
-    logic[9:0] _e_366;
-    (* src = "src/fpgatest.spade:83,50" *)
-    logic _e_364;
-    logic[9:0] _e_371;
-    (* src = "src/fpgatest.spade:83,72" *)
-    logic[10:0] _e_369;
-    (* src = "src/fpgatest.spade:83,66" *)
-    logic[9:0] _e_368;
-    (* src = "src/fpgatest.spade:83,47" *)
-    logic[9:0] _e_363;
-    (* src = "src/fpgatest.spade:83,14" *)
+    logic[9:0] _e_250;
+    logic[9:0] _e_254;
+    (* src = "src/fpgatest.spade:84,50" *)
+    logic _e_252;
+    logic[9:0] _e_259;
+    (* src = "src/fpgatest.spade:84,72" *)
+    logic[10:0] _e_257;
+    (* src = "src/fpgatest.spade:84,66" *)
+    logic[9:0] _e_256;
+    (* src = "src/fpgatest.spade:84,47" *)
+    logic[9:0] _e_251;
+    (* src = "src/fpgatest.spade:84,14" *)
     reg[9:0] \rst_count ;
-    logic[9:0] _e_376;
-    (* src = "src/fpgatest.spade:84,15" *)
+    logic[9:0] _e_264;
+    (* src = "src/fpgatest.spade:85,15" *)
     logic \rst ;
     logic[7:0] \uio_out_mut ;
     logic[7:0] \uio_oe_mut ;
-    logic _e_389;
-    (* src = "src/fpgatest.spade:100,16" *)
-    logic _e_390;
-    (* src = "src/fpgatest.spade:92,13" *)
-    (* src = "src/fpgatest.spade:103,22" *)
+    logic _e_277;
+    (* src = "src/fpgatest.spade:101,16" *)
+    logic _e_278;
+    (* src = "src/fpgatest.spade:93,13" *)
+    (* src = "src/fpgatest.spade:104,22" *)
     logic[15:0] \driver_out ;
-    (* src = "src/fpgatest.spade:104,23" *)
-    logic[7:0] _e_398;
-    (* src = "src/fpgatest.spade:105,24" *)
-    logic[7:0] _e_401;
-    assign _e_362 = 5;
-    assign _e_366 = 0;
-    assign _e_364 = \rst_count  != _e_366;
-    assign _e_371 = 1;
-    assign _e_369 = $signed(\rst_count ) - $signed(_e_371);
-    assign _e_368 = _e_369[9:0];
-    assign _e_363 = _e_364 ? _e_368 : \rst_count ;
+    (* src = "src/fpgatest.spade:105,23" *)
+    logic[7:0] _e_286;
+    (* src = "src/fpgatest.spade:106,24" *)
+    logic[7:0] _e_289;
+    assign _e_250 = 5;
+    assign _e_254 = 0;
+    assign _e_252 = \rst_count  != _e_254;
+    assign _e_259 = 1;
+    assign _e_257 = $signed(\rst_count ) - $signed(_e_259);
+    assign _e_256 = _e_257[9:0];
+    assign _e_251 = _e_252 ? _e_256 : \rst_count ;
     initial begin
         \rst_count  = 'b0000000101;
     end
     always @(posedge \clk ) begin
-        \rst_count  <= _e_363;
+        \rst_count  <= _e_251;
     end
-    assign _e_376 = 0;
-    assign \rst  = \rst_count  != _e_376;
+    assign _e_264 = 0;
+    assign \rst  = \rst_count  != _e_264;
     
     
-    assign _e_389 = 1;
-    assign _e_390 = !\rst ;
-    (* src = "src/fpgatest.spade:92,13" *)
-    tt_um_thezoq2_tmng tt_um_thezoq2_tmng_0(\ui_in , \uo_out_mut , \uio_in , \uio_out_mut , \uio_oe_mut , \clk , _e_389, _e_390);
-    (* src = "src/fpgatest.spade:103,22" *)
-    \tto4_tmng::fpgatest::simple_test_driver  simple_test_driver_0(\clk , \rst , \driver_out );
-    assign _e_398 = \driver_out [15:8];
-    assign \ui_in_drive_mut  = _e_398;
-    assign _e_401 = \driver_out [7:0];
-    assign \uio_in_drive_mut  = _e_401;
+    assign _e_277 = 1;
+    assign _e_278 = !\rst ;
+    (* src = "src/fpgatest.spade:93,13" *)
+    tt_um_thezoq2_tmng tt_um_thezoq2_tmng_0(\ui_in , \uo_out_mut , \uio_in , \uio_out_mut , \uio_oe_mut , \clk , _e_277, _e_278);
+    (* src = "src/fpgatest.spade:104,22" *)
+    \tto4_tmng::generated_driver::simple_test_driver  simple_test_driver_0(\clk , \rst , \driver_out );
+    assign _e_286 = \driver_out [15:8];
+    assign \ui_in_drive_mut  = _e_286;
+    assign _e_289 = \driver_out [7:0];
+    assign \uio_in_drive_mut  = _e_289;
+endmodule
+
+module \tto4_tmng::generated_driver::simple_test_driver  (
+        input clk_i,
+        input rst_i,
+        output[15:0] output__
+    );
+    `ifdef COCOTB_SIM
+    string __top_module;
+    string __vcd_file;
+    initial begin
+        if ($value$plusargs("TOP_MODULE=%s", __top_module) && __top_module == "tto4_tmng::generated_driver::simple_test_driver" && $value$plusargs("VCD_FILENAME=%s", __vcd_file)) begin
+            $dumpfile (__vcd_file);
+            $dumpvars (0, \tto4_tmng::generated_driver::simple_test_driver );
+        end
+    end
+    `endif
+    logic \clk ;
+    assign \clk  = clk_i;
+    logic \rst ;
+    assign \rst  = rst_i;
+    (* src = "src/generated_driver.spade:36,5" *)
+    reg \s1_rst ;
+    (* src = "src/generated_driver.spade:36,5" *)
+    reg[47:0] \s1_state ;
+    (* src = "src/generated_driver.spade:36,5" *)
+    reg[14:0] \s1_read_idx ;
+    (* src = "src/generated_driver.spade:36,5" *)
+    reg[31:0] \s1_commands ;
+    (* src = "src/generated_driver.spade:36,5" *)
+    reg[7:0] \s1_a ;
+    (* src = "src/generated_driver.spade:36,5" *)
+    reg[7:0] \s1_b ;
+    logic[31:0] _e_296;
+    (* src = "src/generated_driver.spade:13,35" *)
+    logic[47:0] _e_295;
+    logic[31:0] _e_299;
+    logic _e_387;
+    logic[31:0] _e_389;
+    logic _e_388;
+    logic _e_390;
+    logic[14:0] _e_302;
+    logic[31:0] _e_303;
+    (* src = "src/generated_driver.spade:14,41" *)
+    logic[47:0] _e_301;
+    logic[31:0] \duration ;
+    logic _e_392;
+    logic _e_393;
+    logic _e_394;
+    logic[31:0] _e_310;
+    (* src = "src/generated_driver.spade:15,56" *)
+    logic[32:0] _e_308;
+    (* src = "src/generated_driver.spade:15,50" *)
+    logic[31:0] _e_307;
+    (* src = "src/generated_driver.spade:15,38" *)
+    logic[47:0] _e_306;
+    logic[14:0] _e_311;
+    logic[31:0] _e_312;
+    logic _e_396;
+    logic[14:0] _e_398;
+    logic _e_397;
+    logic[31:0] _e_400;
+    logic _e_399;
+    logic _e_401;
+    logic _e_402;
+    logic[31:0] _e_316;
+    (* src = "src/generated_driver.spade:17,17" *)
+    logic[47:0] _e_315;
+    logic[14:0] \idx ;
+    logic[31:0] _e_318;
+    logic _e_404;
+    logic _e_405;
+    logic[31:0] _e_407;
+    logic _e_406;
+    logic _e_408;
+    logic _e_409;
+    logic[14:0] _e_325;
+    (* src = "src/generated_driver.spade:20,34" *)
+    logic[15:0] _e_323;
+    (* src = "src/generated_driver.spade:20,28" *)
+    logic[14:0] _e_322;
+    logic[31:0] _e_326;
+    (* src = "src/generated_driver.spade:20,17" *)
+    logic[47:0] _e_321;
+    logic[14:0] idx_n1;
+    logic[31:0] duration_n1;
+    logic _e_411;
+    logic _e_412;
+    logic _e_413;
+    logic _e_414;
+    logic _e_415;
+    (* src = "src/generated_driver.spade:23,28" *)
+    logic[14:0] _e_332;
+    logic[31:0] _e_337;
+    (* src = "src/generated_driver.spade:23,46" *)
+    logic[32:0] _e_335;
+    (* src = "src/generated_driver.spade:23,40" *)
+    logic[31:0] _e_334;
+    (* src = "src/generated_driver.spade:23,17" *)
+    logic[47:0] _e_331;
+    (* src = "src/generated_driver.spade:13,53" *)
+    logic[47:0] _e_297;
+    (* src = "src/generated_driver.spade:13,18" *)
+    reg[47:0] \state ;
+    logic[14:0] idx_n2;
+    logic[31:0] \_ ;
+    logic _e_417;
+    logic _e_418;
+    logic _e_419;
+    logic _e_420;
+    logic _e_421;
+    logic[31:0] __n1;
+    logic _e_423;
+    logic _e_424;
+    logic _e_425;
+    logic[14:0] _e_346;
+    (* src = "src/generated_driver.spade:27,24" *)
+    logic[14:0] \read_idx ;
+    logic[7:0] _e_350;
+    logic[7:0] _e_351;
+    (* src = "src/generated_driver.spade:32,26" *)
+    logic[15:0] _e_349;
+    logic[7:0] _e_353;
+    logic[7:0] _e_354;
+    (* src = "src/generated_driver.spade:33,2" *)
+    logic[15:0] _e_352;
+    (* src = "src/generated_driver.spade:32,24" *)
+    logic[31:0] \commands ;
+    (* src = "src/generated_driver.spade:35,31" *)
+    logic _e_358;
+    (* src = "src/generated_driver.spade:35,22" *)
+    logic[15:0] _e_362;
+    logic[7:0] \a ;
+    logic[7:0] \b ;
+    (* src = "src/generated_driver.spade:37,9" *)
+    logic[15:0] _e_363;
+    always @(posedge \clk ) begin
+        \s1_rst  <= \rst ;
+    end
+    always @(posedge \clk ) begin
+        \s1_state  <= \state ;
+    end
+    always @(posedge \clk ) begin
+        \s1_read_idx  <= \read_idx ;
+    end
+    always @(posedge \clk ) begin
+        \s1_commands  <= \commands ;
+    end
+    always @(posedge \clk ) begin
+        \s1_a  <= \a ;
+    end
+    always @(posedge \clk ) begin
+        \s1_b  <= \b ;
+    end
+    assign _e_296 = 32'd0;
+    assign _e_295 = {1'd0, _e_296, 15'bX};
+    assign _e_299 = \state [46:15];
+    assign _e_387 = \state [47] == 1'd0;
+    assign _e_389 = 32'd100000000;
+    assign _e_388 = _e_299 == _e_389;
+    assign _e_390 = _e_387 && _e_388;
+    assign _e_302 = 0;
+    assign _e_303 = 32'd0;
+    assign _e_301 = {1'd1, _e_302, _e_303};
+    assign \duration  = \state [46:15];
+    assign _e_392 = \state [47] == 1'd0;
+    assign _e_393 = 1;
+    assign _e_394 = _e_392 && _e_393;
+    assign _e_310 = 32'd1;
+    assign _e_308 = $signed(\duration ) + $signed(_e_310);
+    assign _e_307 = _e_308[31:0];
+    assign _e_306 = {1'd0, _e_307, 15'bX};
+    assign _e_311 = \state [46:32];
+    assign _e_312 = \state [31:0];
+    assign _e_396 = \state [47] == 1'd1;
+    assign _e_398 = 1;
+    assign _e_397 = _e_311 == _e_398;
+    assign _e_400 = 32'd9;
+    assign _e_399 = _e_312 == _e_400;
+    assign _e_401 = _e_396 && _e_397;
+    assign _e_402 = _e_401 && _e_399;
+    assign _e_316 = 32'd0;
+    assign _e_315 = {1'd0, _e_316, 15'bX};
+    assign \idx  = \state [46:32];
+    assign _e_318 = \state [31:0];
+    assign _e_404 = \state [47] == 1'd1;
+    assign _e_405 = 1;
+    assign _e_407 = 32'd9;
+    assign _e_406 = _e_318 == _e_407;
+    assign _e_408 = _e_404 && _e_405;
+    assign _e_409 = _e_408 && _e_406;
+    assign _e_325 = 1;
+    assign _e_323 = $signed(\idx ) + $signed(_e_325);
+    assign _e_322 = _e_323[14:0];
+    assign _e_326 = 32'd0;
+    assign _e_321 = {1'd1, _e_322, _e_326};
+    assign idx_n1 = \state [46:32];
+    assign duration_n1 = \state [31:0];
+    assign _e_411 = \state [47] == 1'd1;
+    assign _e_412 = 1;
+    assign _e_413 = 1;
+    assign _e_414 = _e_411 && _e_412;
+    assign _e_415 = _e_414 && _e_413;
+    assign _e_332 = idx_n1[14:0];
+    assign _e_337 = 32'd1;
+    assign _e_335 = $signed(duration_n1) + $signed(_e_337);
+    assign _e_334 = _e_335[31:0];
+    assign _e_331 = {1'd1, _e_332, _e_334};
+    always_comb begin
+        priority casez ({_e_390, _e_394, _e_402, _e_409, _e_415})
+            5'b1????: _e_297 = _e_301;
+            5'b01???: _e_297 = _e_306;
+            5'b001??: _e_297 = _e_315;
+            5'b0001?: _e_297 = _e_321;
+            5'b00001: _e_297 = _e_331;
+            5'b?: _e_297 = 'x;
+        endcase
+    end
+    always @(posedge \clk , posedge \rst ) begin
+        if (\rst ) begin
+            \state  <= _e_295;
+        end
+        else begin
+            \state  <= _e_297;
+        end
+    end
+    assign idx_n2 = \state [46:32];
+    assign \_  = \state [31:0];
+    assign _e_417 = \state [47] == 1'd1;
+    assign _e_418 = 1;
+    assign _e_419 = 1;
+    assign _e_420 = _e_417 && _e_418;
+    assign _e_421 = _e_420 && _e_419;
+    assign __n1 = \state [46:15];
+    assign _e_423 = \state [47] == 1'd0;
+    assign _e_424 = 1;
+    assign _e_425 = _e_423 && _e_424;
+    assign _e_346 = 0;
+    always_comb begin
+        priority casez ({_e_421, _e_425})
+            2'b1?: \read_idx  = idx_n2;
+            2'b01: \read_idx  = _e_346;
+            2'b?: \read_idx  = 'x;
+        endcase
+    end
+    assign _e_350 = 2;
+    assign _e_351 = 1;
+    assign _e_349 = {_e_350, _e_351};
+    assign _e_353 = 130;
+    assign _e_354 = 130;
+    assign _e_352 = {_e_353, _e_354};
+    assign \commands  = {_e_352, _e_349};
+    assign _e_358 = \read_idx [0:0];
+    assign _e_362 = \commands [_e_358 * 16+:16];
+    assign \a  = _e_362[15:8];
+    assign \b  = _e_362[7:0];
+    assign _e_363 = {\s1_a , \s1_b };
+    assign output__ = _e_363;
 endmodule
