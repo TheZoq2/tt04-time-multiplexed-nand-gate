@@ -37,3 +37,26 @@ jobs:
           name: test-vcd
           path: src/tb.vcd
 
+    - name: Put VCD on pages
+      if: success() || failure()
+      shell: bash
+      run: |
+        mkdir gh-pages
+        cp src/tb.vcd gh-pages/tb.vcd
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: 'gh-pages'
+
+
+    - name: Display link to surfer in workflow summary
+      shell: bash
+      run: |
+        PAGE_URL=${{ steps.deployment.outputs.page_url }}
+        PAGE_URL=$(echo "$PAGE_URL" | sed -e 's/\/$//')
+        cat << EOF >> $GITHUB_STEP_SUMMARY
+        [View simulation trace](https://surfer-project.org/?vcd=$PAGE_URL/tb.vcd)
+
+        EOF
+
